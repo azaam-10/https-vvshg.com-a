@@ -20,10 +20,10 @@ const App: React.FC = () => {
   const nextStep = () => setModalStep(prev => prev + 1);
 
   return (
-    <div className={`relative flex flex-col min-h-screen bg-[#F8F9FA] text-[#333] pb-24 select-none max-w-[430px] mx-auto shadow-xl overflow-x-hidden font-sans ${modalStep > 0 ? 'h-screen overflow-hidden' : ''}`}>
+    <div className={`relative flex flex-col min-h-screen bg-[#F8F9FA] text-[#333] select-none max-w-[430px] mx-auto shadow-xl overflow-x-hidden font-sans ${modalStep > 0 ? 'h-screen overflow-hidden' : ''}`}>
       
       {/* Background Content (Main Page) */}
-      <div className={`${modalStep > 0 ? 'blur-[1.5px] pointer-events-none' : ''} transition-all duration-300`}>
+      <div className={`flex-1 pb-32 ${modalStep > 0 ? 'blur-[1.5px] pointer-events-none' : ''} transition-all duration-300`}>
         {/* Header Section */}
         <header className="relative w-full px-5 pt-10 pb-10 bg-gradient-to-r from-[#9B4A4E] to-[#7C4A50]">
           <div className="absolute top-6 right-5 cursor-pointer">
@@ -91,16 +91,20 @@ const App: React.FC = () => {
           <MenuListItem icon={<CardIcon className="w-6 h-6 text-gray-400" />} label="تفاصيل الانسحاب" />
           <MenuListItem icon={<SettingsIcon />} label="إعدادات العملية" />
         </div>
+      </div>
 
-        {/* Bottom Navigation */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex justify-around items-center h-[72px] px-1">
+      {/* Bottom Navigation - Fixed to the absolute bottom with safe area support */}
+      <nav className="fixed bottom-0 left-0 right-0 z-[80] bg-white border-t border-gray-100 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] max-w-[430px] mx-auto">
+        <div className="flex justify-around items-center h-[72px] px-1 pb-[env(safe-area-inset-bottom)]">
           <BottomNavItem icon={<HomeIcon />} label="الصفحة الأمامية" />
           <BottomNavItem icon={<HeadsetIcon />} label="خدمة الزبائن" />
           <BottomNavItem icon={<StoreIcon />} label="قائمة الطعام" />
           <BottomNavItem icon={<CalendarIcon />} label="سجل" />
           <BottomNavItem icon={<UserNavIcon />} label="أنا" active />
-        </nav>
-      </div>
+        </div>
+        {/* This creates the space for the home indicator on modern phones */}
+        <div className="h-[env(safe-area-inset-bottom)] bg-white w-full"></div>
+      </nav>
 
       {/* Modal Overlay System */}
       {modalStep > 0 && (
@@ -212,9 +216,6 @@ const App: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* Visual Bottom Bar */}
-      <div className="fixed bottom-1 left-1/2 -translate-x-1/2 w-24 h-1 bg-gray-300 rounded-full z-[60]"></div>
     </div>
   );
 };
