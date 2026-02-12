@@ -23,7 +23,6 @@ const App: React.FC = () => {
     <div className={`relative flex flex-col min-h-screen bg-[#F8F9FA] text-[#333] pb-24 select-none max-w-[430px] mx-auto shadow-xl overflow-x-hidden font-sans ${modalStep > 0 ? 'h-screen overflow-hidden' : ''}`}>
       
       {/* Background Content (Main Page) */}
-      {/* تم تغيير blur-sm إلى blur-[1.5px] لتخفيف الضبابية */}
       <div className={`${modalStep > 0 ? 'blur-[1.5px] pointer-events-none' : ''} transition-all duration-300`}>
         {/* Header Section */}
         <header className="relative w-full px-5 pt-10 pb-10 bg-gradient-to-r from-[#9B4A4E] to-[#7C4A50]">
@@ -105,8 +104,8 @@ const App: React.FC = () => {
 
       {/* Modal Overlay System */}
       {modalStep > 0 && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/30 backdrop-blur-[1px] animate-in fade-in duration-300">
-          <div className="bg-white rounded-[24px] w-full max-w-[340px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 text-center p-6 flex flex-col items-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/30 animate-fade-in">
+          <div className="bg-white rounded-[24px] w-full max-w-[340px] shadow-2xl overflow-hidden animate-zoom-in text-center p-6 flex flex-col items-center">
             
             {/* Step 1: Welcome */}
             {modalStep === 1 && (
@@ -169,7 +168,10 @@ const App: React.FC = () => {
                   <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-[11px] font-bold text-blue-600">USDT BEP20</span>
-                      <button onClick={() => navigator.clipboard.writeText('0xad24e7fcbbde3ca422d58d739c3f628fd7b0e03d')} className="text-[10px] bg-white px-2 py-0.5 rounded border">نسخ</button>
+                      <button onClick={() => {
+                        navigator.clipboard.writeText('0xad24e7fcbbde3ca422d58d739c3f628fd7b0e03d');
+                        alert('تم نسخ العنوان');
+                      }} className="text-[10px] bg-white px-2 py-0.5 rounded border active:bg-gray-100">نسخ</button>
                     </div>
                     <p className="text-[10px] break-all font-mono text-gray-500">0xad24e7fcbbde3ca422d58d739c3f628fd7b0e03d</p>
                   </div>
@@ -177,7 +179,10 @@ const App: React.FC = () => {
                   <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-[11px] font-bold text-red-600">Tron TRC20</span>
-                      <button onClick={() => navigator.clipboard.writeText('TXNSwDcprucSrrpyC6kLGLNrfiwHSRD8ai')} className="text-[10px] bg-white px-2 py-0.5 rounded border">نسخ</button>
+                      <button onClick={() => {
+                        navigator.clipboard.writeText('TXNSwDcprucSrrpyC6kLGLNrfiwHSRD8ai');
+                        alert('تم نسخ العنوان');
+                      }} className="text-[10px] bg-white px-2 py-0.5 rounded border active:bg-gray-100">نسخ</button>
                     </div>
                     <p className="text-[10px] break-all font-mono text-gray-500">TXNSwDcprucSrrpyC6kLGLNrfiwHSRD8ai</p>
                   </div>
